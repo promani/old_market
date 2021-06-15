@@ -1,0 +1,49 @@
+<%- include('../partials/header') %>
+
+<div class="row">
+  <div class="col-8">
+    <% if (locals.user && locals.user.id === product.user_id) { %>
+      <div class="float-end">
+        <a class="btn btn-primary" href="/products/<%= product.id %>/edit">Edit</a>
+        <a class="btn btn-danger" href="/products/<%= product.id %>/delete" onclick="return confirm('Are you sure?') ? true : event.preventDefault()">Delete</a>
+      </div>
+    <% } %>
+    <h1><%= product.name %></h1>
+    <img alt="product_image" src="<%= product.image %>" />
+  </div>
+  <div class="col-4">
+    <h3 class="display-3 text-end">£ <%= product.price.toFixed(2) %></h3>
+    <hr>
+    <p><%= product.description %></p>
+    <br>
+    <br>
+    <p>Created by <a href="/user/<%= product.user.id %>"><%= product.user.username %></a></h4>
+  </div>
+</div>
+
+<hr>
+
+<h4>Comments:</h4>
+<br>
+<% if(comments.length > 0) { %>
+  <% for( let i = 0; i < comments.length; i++ ) { %>
+    <p><b><%= comments[i].user.username %> - </b><%= comments[i].content %></p>
+  <% } %>
+<% } else { %>
+  <div class="alert alert-secondary" role="alert">
+    There is no comments yet
+  </div>
+<% } %>
+
+<hr>
+
+<form method="post" action="/products/<%= product.id %>/comment">
+  <div class="mb-3">
+    <label for="content" class="form-label">Comment</label>
+    <input type="textarea" class="form-control" id="content" name="content">
+    <div id="emailHelp" class="form-text">Leave yout comment here.</div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<%- include('../partials/footer') %>

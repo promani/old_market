@@ -1,0 +1,33 @@
+<% if (locals.cart && cart.length > 0) { %>
+  <h3>My Cart:</h3>
+  <div class="row mb-3">
+      <% for (let i = 0; i < cart.length; i++) { %>
+        <div class="col-2 mb-2">
+            <div class="card">
+              <div class="d-flex justify-content-center show-on-hover">
+                <a class="btn btn-dark align-self-center" href="/cart/<%= i %>/remove">Remove</a>
+              </div>
+              <% if (cart[i].image) { %>
+                  <img class="image-fit border-bottom" alt="product_image" src="<%= cart[i].image %>" />
+              <% } else { %>
+                  <%- include('./placeholder') %>
+              <% } %>
+            </div>
+        </div>
+      <% } %>
+      <div class="col-2">
+          <div class="card p-3" style="height: 200px">
+              <p class="card-text">
+                  <ul class="mb-3">
+                      <li><b>Elements: </b><%= cart.length %></li>
+                      <li><b>Total: </b>$ <%= cart.reduce((a, b) => a + b.price, 0) %></li>
+                  </ul>
+                  <div class="d-grid gap-2">
+                      <a class="btn btn-danger" href="/cart/buy">Buy</a>
+                      <a class="btn btn-secondary" href="/cart/clear">Clear</a>
+                  </div>
+              </p>
+          </div>
+      </div>
+  </div>
+<% } %>

@@ -1,0 +1,49 @@
+<%- include('./partials/header') %>
+    <%- include('./partials/cart') %> 
+    <div class="row">
+        <div class="col-7">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid">
+                    <h1 class="display-5 fw-bold">The delicious world of vintage</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas, augue vel ullamcorper congue, lectus ante venenatis nisl, quis varius libero libero sed nulla. Sed gravida ligula sit amet sapien sollicitudin venenatis. Curabitur tincidunt lectus ipsum, et sollicitudin enim varius eu.
+                    </p>
+                    <button class="btn btn-primary btn-lg" type="button">Example button</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <img class="w-100" alt="home" src="images/home.jpg">
+        </div>
+    </div>
+
+    <div class="mb-4">
+      <div class="row">
+        <% for (const product of products) { %>
+          <div class="col-3 mb-2">
+            <div class="card">
+              <% if (product.image) { %>
+                <img class="image-fit border-bottom" alt="product_image" src="<%= product.image %>" />
+              <% } else { %>
+                <%- include('./partials/placeholder') %>
+              <% } %>
+              <div class="card-body">
+                <h5 class="card-title"><%= product.name %></h5>
+                <p class="card-text">
+                  <span class="text-muted">Comments <%= product.comments.length %></span>
+                  <p><%= product.description %></p>
+                </p>
+                <a href="/products/<%= product.id %>" class="btn btn-primary">View more</a>
+                <a href="/cart/<%= product.id %>/add" class="btn btn-success">Add to cart</a>
+                  <% if (locals.user) { %>
+                      <hr>
+                      <a href="/products/<%= product.id %>/edit" class="btn btn-info">Edit</a>
+                      <a href="/products/<%= product.id %>/delete" onclick="return confirm('Are you sure?') ? true : event.preventDefault()" class="btn btn-danger">Delete</a>
+                  <% } %>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+<%- include('./partials/footer') %>

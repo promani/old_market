@@ -1,0 +1,30 @@
+<%- include('./partials/header') %>
+<div class="mb-4">
+  <div class="row">
+    <% for (const product of products) { %>
+      <div class="col-3 mb-2">
+        <div class="card">
+          <% if (product.image) { %>
+            <img class="image-fit border-bottom" alt="product_image" src="<%= product.image %>" />
+          <% } else { %>
+            <%- include('./placeholder') %>
+          <% } %>
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text">
+              <span class="text-muted">Comments <%= product.comments.length %></span>
+            <p><%= product.description %></p>
+            </p>
+            <a href="/products/<%= product.id %>" class="btn btn-primary">View more</a>
+            <% if (locals.user) { %>
+              <hr>
+              <a href="/products/<%= product.id %>/edit" class="btn btn-info">Edit product</a>
+              <a href="/products/<%= product.id %>/delete" onclick="confirm('Are you sure?')" class="btn btn-danger">Delete</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+<%- include('./partials/footer') %>

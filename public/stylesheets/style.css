@@ -1,0 +1,20 @@
+.image-fit{
+  margin-top: auto;
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.show-on-hover {
+  position: absolute;
+  background: rgba(38, 43, 64, 0.6);
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.show-on-hover:hover {
+  z-index: 99;
+  opacity: 1;
+}
