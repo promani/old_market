@@ -1,6 +1,6 @@
 {
   "username": "root",
-  "password": "redcatanox",
+  "password": "",
   "database": "old_market",
   "dialect": "mysql"
 }

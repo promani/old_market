@@ -27,7 +27,7 @@ module.exports = {
       comments,
     });
   },
-  add(req, res) {
+  async add(req, res) {
     if (req.method === 'POST') {
       req.body.user_id = req.session.user.id;
       if (req.body.url) req.body.image = req.body.url;
